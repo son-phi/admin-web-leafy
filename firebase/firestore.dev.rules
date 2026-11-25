@@ -1,13 +1,27 @@
-// DEV / EMULATOR ONLY. Original Android rules were not available.
+// Rules cho DEV / EMULATOR theo ADMIN_SPEC mục 7.
+// Khi áp dụng production: phối hợp với người làm Android, CHỈ bổ sung các điều kiện admin dưới đây
+// vào rules hiện có của app, không ghi đè quyền đọc/ghi của người dùng Android.
 rules_version = '2';
 service cloud.firestore {
- match /databases/{database}/documents {
-  function signedIn() { return request.auth != null; }
-  function admin() { return signedIn() && request.auth.token.admin == true; }
-  match /plants/{id} { allow read: if signedIn(); allow write: if false; }
-  match /diseases/{id} { allow read: if signedIn(); allow write: if false; }
-  match /admin_audit/{id} { allow read: if admin(); allow write: if false; }
-  match /users/{uid} { allow read: if admin() || (signedIn() && request.auth.uid == uid); allow write: if false; }
-  match /gardens/{id} { allow read: if admin(); allow write: if false; }
- }
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.token.get('admin', false) == true; }
+
+    // Danh mục: mọi người dùng đăng nhập được đọc; ghi chỉ qua Cloud Functions.
+    match /species/{id} { allow read: if signedIn(); allow write: if false; }
+    match /diseases/{id} { allow read: if signedIn(); allow write: if false; }
+
+    match /users/{uid} {
+      allow read: if (signedIn() && request.auth.uid == uid) || isAdmin();
+      match /lockHistory/{logId} { allow read: if isAdmin(); allow write: if false; }
+    }
+
+    // Chỉ bổ sung quyền đọc cho admin (thống kê, đếm); quyền của người dùng do rules Android quyết định.
+    match /{path=**}/plants/{id} { allow read: if isAdmin(); }
+    match /{path=**}/diagnoses/{id} { allow read: if isAdmin(); }
+    match /{path=**}/wateringLogs/{id} { allow read: if isAdmin(); }
+    match /{path=**}/chatSessions/{id} { allow read: if isAdmin(); }
+    match /{path=**}/nodes/{id} { allow read: if isAdmin(); }
+    match /devices/{id} { allow read: if isAdmin(); }
+  }
 }

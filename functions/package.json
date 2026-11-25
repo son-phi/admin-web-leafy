@@ -1,1 +1,22 @@
-{"name":"leafy-admin-functions","private":true,"main":"lib/functions/src/index.js","engines":{"node":"22"},"scripts":{"build":"tsc -p tsconfig.json","grant-admin":"node scripts/grant-admin.cjs"},"dependencies":{"firebase-admin":"^13.4.0","firebase-functions":"^6.4.0","zod":"^4.0.0"},"devDependencies":{"@types/node":"^22.0.0","typescript":"~5.9.2"}}
+{
+  "name": "leafy-admin-functions",
+  "private": true,
+  "main": "lib/functions/src/index.js",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "grant-admin": "node scripts/grant-admin.cjs"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^6.4.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "~5.9.2"
+  },
+  "type": "module"
+}

@@ -1,0 +1,41 @@
+// Thông báo nguyên văn từ kịch bản (ADMIN_SPEC mục 5). Functions trả khóa trong HttpsError.details.code.
+export const MSG = {
+  LOAD_FAILED: 'Không thể tải dữ liệu, vui lòng thử lại',
+  INVALID_RANGE: 'Khoảng thời gian không hợp lệ',
+  NO_DATA_RANGE: 'Chưa có dữ liệu trong khoảng thời gian này',
+  ACCOUNT_NOT_FOUND: 'Không tìm thấy tài khoản',
+  CANNOT_LOCK_SELF: 'Không thể khóa tài khoản đang đăng nhập',
+  CANNOT_LOCK_ADMIN: 'Không thể khóa tài khoản quản trị viên',
+  STATUS_UPDATED: 'Cập nhật trạng thái tài khoản thành công',
+  UPDATE_FAILED: 'Cập nhật thất bại, vui lòng thử lại',
+  SPECIES_ADDED: 'Thêm loài cây thành công',
+  UPDATED: 'Cập nhật thành công',
+  INVALID_THRESHOLD: 'Ngưỡng không hợp lệ',
+  SPECIES_EXISTS: 'Loài cây đã có trong danh mục',
+  INVALID_IMAGE: 'Ảnh không hợp lệ',
+  LABEL_USED: 'Mã nhãn đã được sử dụng',
+  SPECIES_IN_USE: 'Không thể xóa loài cây đang được sử dụng',
+  CONFIRM_DELETE_SPECIES: 'Bạn có chắc muốn xóa loài cây này?',
+  DISEASE_ADDED: 'Thêm bệnh cây thành công',
+  DISEASE_EXISTS: 'Bệnh cây đã có trong danh mục',
+  CONFIRM_DELETE_DISEASE: 'Bạn có chắc muốn xóa bệnh này?',
+  DISEASE_LABEL_WARNING: 'Người dùng sẽ không nhận được hướng xử lý khi mô hình chẩn đoán ra bệnh này',
+  NOT_ADMIN: 'Tài khoản không có quyền truy cập trang quản trị',
+  CONFLICT: 'Dữ liệu đã được người khác cập nhật, vui lòng tải lại',
+  // Bổ sung kỹ thuật (không có trong kịch bản)
+  INVALID_INPUT: 'Dữ liệu không hợp lệ',
+  NOT_FOUND: 'Không tìm thấy dữ liệu',
+  PERMISSION_DENIED: 'Yêu cầu quyền quản trị',
+  BACKEND_NOT_ALLOWED: 'Project backend chưa được cho phép',
+  LOGIN_FAILED: 'Email hoặc mật khẩu không đúng',
+  ACCOUNT_DISABLED: 'Tài khoản đã bị khóa',
+  TOO_MANY_ATTEMPTS: 'Đăng nhập sai quá nhiều lần, vui lòng thử lại sau',
+  NETWORK_ERROR: 'Không kết nối được máy chủ, vui lòng thử lại',
+  SPECIES_DELETED: 'Xóa loài cây thành công',
+  DISEASE_DELETED: 'Xóa bệnh cây thành công',
+  IMAGE_REQUIRED: 'Vui lòng chọn ảnh minh họa',
+  SPECIES_NOT_FOUND: 'Loài cây được chọn không còn trong danh mục, vui lòng tải lại',
+} as const;
+
+export type MsgKey = keyof typeof MSG;
+export const isMsgKey = (value: unknown): value is MsgKey => typeof value === 'string' && Object.hasOwn(MSG, value);
