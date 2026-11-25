@@ -1,0 +1,187 @@
+{
+  "species": [
+    {
+      "id": "trau-ba",
+      "commonName": "Trầu bà",
+      "scientificName": "Epipremnum aureum",
+      "aiLabel": "epipremnum_aureum",
+      "lightNeed": "MEDIUM",
+      "wateringCycleDays": 5,
+      "fertilizingCycleDays": 30,
+      "description": "Cây dây leo dễ chăm, chịu bóng tốt, thích hợp trồng trong nhà.",
+      "threshold": {
+        "soilMoistureMin": 40,
+        "soilMoistureMax": 70,
+        "temperatureMin": 18,
+        "temperatureMax": 32,
+        "airHumidityMin": 50,
+        "airHumidityMax": 80,
+        "lightMin": 1000,
+        "lightMax": 10000
+      }
+    },
+    {
+      "id": "luoi-ho",
+      "commonName": "Lưỡi hổ",
+      "scientificName": "Dracaena trifasciata",
+      "aiLabel": "dracaena_trifasciata",
+      "lightNeed": "LOW",
+      "wateringCycleDays": 14,
+      "fertilizingCycleDays": 60,
+      "description": "Cây mọng nước chịu hạn, lọc không khí, cần ít nước.",
+      "threshold": {
+        "soilMoistureMin": 15,
+        "soilMoistureMax": 40,
+        "temperatureMin": 15,
+        "temperatureMax": 35,
+        "airHumidityMin": 30,
+        "airHumidityMax": 60,
+        "lightMin": 500,
+        "lightMax": 20000
+      }
+    },
+    {
+      "id": "monstera",
+      "commonName": "Monstera",
+      "scientificName": "Monstera deliciosa",
+      "aiLabel": "monstera_deliciosa",
+      "lightNeed": "MEDIUM",
+      "wateringCycleDays": 7,
+      "fertilizingCycleDays": 30,
+      "description": "Cây lá xẻ nhiệt đới, ưa ẩm và ánh sáng gián tiếp.",
+      "threshold": {
+        "soilMoistureMin": 45,
+        "soilMoistureMax": 75,
+        "temperatureMin": 18,
+        "temperatureMax": 30,
+        "airHumidityMin": 60,
+        "airHumidityMax": 85,
+        "lightMin": 2000,
+        "lightMax": 15000
+      }
+    },
+    {
+      "id": "lan-y",
+      "commonName": "Lan ý",
+      "scientificName": "Spathiphyllum wallisii",
+      "aiLabel": "spathiphyllum_wallisii",
+      "lightNeed": "LOW",
+      "wateringCycleDays": 4,
+      "fertilizingCycleDays": 45,
+      "description": "Cây hoa trắng ưa bóng râm, cần giữ đất ẩm đều.",
+      "threshold": {
+        "soilMoistureMin": 50,
+        "soilMoistureMax": 80,
+        "temperatureMin": 18,
+        "temperatureMax": 30,
+        "airHumidityMin": 55,
+        "airHumidityMax": 85,
+        "lightMin": 500,
+        "lightMax": 8000
+      }
+    },
+    {
+      "id": "sen-da",
+      "commonName": "Sen đá",
+      "scientificName": "Echeveria elegans",
+      "aiLabel": "echeveria_elegans",
+      "lightNeed": "DIRECT",
+      "wateringCycleDays": 10,
+      "fertilizingCycleDays": 60,
+      "description": "Cây mọng nước ưa nắng trực tiếp, đất thoát nước nhanh.",
+      "threshold": {
+        "soilMoistureMin": 10,
+        "soilMoistureMax": 35,
+        "temperatureMin": 10,
+        "temperatureMax": 35,
+        "airHumidityMin": 20,
+        "airHumidityMax": 50,
+        "lightMin": 10000,
+        "lightMax": 60000
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "id": "vang-la",
+      "nameVi": "Vàng lá do úng",
+      "scientificName": null,
+      "aiLabel": "yellow_leaf_overwatering",
+      "affectedSpeciesIds": [
+        "trau-ba",
+        "lan-y",
+        "monstera"
+      ],
+      "causes": "Tưới quá nhiều, đất bí khí, rễ thiếu oxy.",
+      "symptoms": "Lá chuyển vàng từ gốc lên, mềm úng.",
+      "treatmentMild": "Giảm tưới, để đất khô bề mặt.",
+      "treatmentModerate": "Cắt lá vàng, thay đất thoát nước tốt.",
+      "treatmentSevere": "Cắt bỏ rễ thối, thay chậu và đất mới.",
+      "prevention": "Kiểm tra độ ẩm đất trước khi tưới."
+    },
+    {
+      "id": "thoi-re",
+      "nameVi": "Thối rễ",
+      "scientificName": "Pythium spp.",
+      "aiLabel": "root_rot",
+      "affectedSpeciesIds": [
+        "sen-da",
+        "luoi-ho"
+      ],
+      "causes": "Nấm Pythium phát triển khi đất ẩm kéo dài.",
+      "symptoms": "Gốc mềm nhũn, lá héo dù đất ẩm.",
+      "treatmentMild": "Ngưng tưới, phơi khô đất.",
+      "treatmentModerate": "Xử lý rễ bằng thuốc gốc đồng.",
+      "treatmentSevere": "Giâm lại phần ngọn còn khỏe, bỏ phần thối.",
+      "prevention": "Dùng đất thoát nước, chậu có lỗ."
+    },
+    {
+      "id": "dom-la",
+      "nameVi": "Đốm lá",
+      "scientificName": "Cercospora spp.",
+      "aiLabel": "leaf_spot",
+      "affectedSpeciesIds": [
+        "monstera",
+        "trau-ba"
+      ],
+      "causes": "Nấm gây bệnh khi lá ướt lâu.",
+      "symptoms": "Đốm nâu viền vàng trên mặt lá.",
+      "treatmentMild": "Cắt lá bệnh, tránh tưới lên lá.",
+      "treatmentModerate": "Phun thuốc trừ nấm sinh học.",
+      "treatmentSevere": "Phun thuốc trừ nấm định kỳ 7 ngày, cách ly cây.",
+      "prevention": "Giữ thông thoáng, tưới vào gốc."
+    },
+    {
+      "id": "phan-trang",
+      "nameVi": "Phấn trắng",
+      "scientificName": "Erysiphales",
+      "aiLabel": "powdery_mildew",
+      "affectedSpeciesIds": [
+        "sen-da"
+      ],
+      "causes": "Nấm phát triển khi không khí ẩm, thiếu nắng.",
+      "symptoms": "Lớp phấn trắng trên lá.",
+      "treatmentMild": "Lau sạch lá, tăng ánh sáng.",
+      "treatmentModerate": "Phun dung dịch baking soda loãng.",
+      "treatmentSevere": "Phun thuốc đặc trị phấn trắng.",
+      "prevention": null
+    },
+    {
+      "id": "rep-sap",
+      "nameVi": "Rệp sáp",
+      "scientificName": "Pseudococcidae",
+      "aiLabel": "mealybug",
+      "affectedSpeciesIds": [
+        "lan-y",
+        "luoi-ho",
+        "sen-da"
+      ],
+      "causes": "Côn trùng chích hút lây từ cây khác.",
+      "symptoms": "Cụm bông trắng ở nách lá, lá xoăn.",
+      "treatmentMild": "Lau bằng cồn loãng.",
+      "treatmentModerate": "Phun dầu neem.",
+      "treatmentSevere": "Cách ly, phun thuốc trừ rệp lưu dẫn.",
+      "prevention": "Kiểm tra cây mới trước khi đặt cạnh cây khác."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+rules_version = '2';
+// Ảnh danh mục do web quản trị tải lên (ADMIN_SPEC mục 7).
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin() { return request.auth != null && request.auth.token.get('admin', false) == true; }
+    function validImage() {
+      return request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/(jpeg|png|webp)');
+    }
+    match /species/{file} {
+      allow read: if request.auth != null;
+      allow create, update: if isAdmin() && validImage();
+      allow delete: if isAdmin();
+    }
+    match /diseases/{file} {
+      allow read: if request.auth != null;
+      allow create, update: if isAdmin() && validImage();
+      allow delete: if isAdmin();
+    }
+  }
+}

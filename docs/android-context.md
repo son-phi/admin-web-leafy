@@ -1,5 +1,7 @@
 # Khảo sát Android — 23/11/2026
 
+> **Cập nhật 25/11/2026:** phạm vi và lược đồ web quản trị nay theo [ADMIN_SPEC.md](../ADMIN_SPEC.md) (lược đồ 2.4: `species`, `users.role/status`, `devices`…). Các “Quyết định triển khai admin” bên dưới (danh mục `plants`, `admin_audit`, không xóa danh mục) không còn áp dụng; phần khảo sát mã Android vẫn giữ làm bằng chứng hiện trạng.
+
 ## Phạm vi và bằng chứng
 
 Đã đọc trực tiếp `D:\androidstudio`. Gốc Gradle: `D:\androidstudio`; `settings.gradle.kts` đặt tên `leafyApp`, include `:app`. Module: `D:\androidstudio\app`; `app/build.gradle.kts` khai báo namespace `com.example.leafyapp`, applicationId `leafyapp.dev` (tên này **không** chứng minh đây là môi trường dev).
