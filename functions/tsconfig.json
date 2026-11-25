@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2022","module":"CommonJS","moduleResolution":"Node","strict":true,"esModuleInterop":true,"skipLibCheck":true,"outDir":"lib","rootDir":".."},"include":["src","../shared/catalog.ts","../shared/environment.ts"],"exclude":["src/**/*.test.ts"]}

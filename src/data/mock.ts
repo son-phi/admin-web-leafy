@@ -1,0 +1,16 @@
+import type { Collection, Repository, Row, Session } from './types';
+import { fingerprint, mutationSchema } from '../../shared/catalog';
+const names = ['Trầu bà','Lưỡi hổ','Monstera','Lan ý','Kim tiền','Cau tiểu trâm','Sen đá','Đa búp đỏ','Ngọc ngân','Dương xỉ','Hương thảo','Bàng Singapore','Cẩm nhung'];
+const seed:Record<Collection,Row[]>={plants:names.map((name,i)=>({key:String(i+1),data:{id:i+1,name,scientificName:'',description:'Dữ liệu minh họa do admin tạo, không sao chép production.',light:'Ánh sáng gián tiếp',watering:'Kiểm tra độ ẩm đất trước khi tưới',soil:'Thoát nước tốt',fertilizer:'',temperature:'',humidity:'',image:'',popularity:20-i}})),diseases:[{key:'1',data:{id:1,diseaseName:'Vàng lá (minh họa)',reasons:['Tưới quá nhiều'],solutions:['Kiểm tra thoát nước'],plants:['Trầu bà']}}],gardens:[{key:'garden-demo',data:{id:'garden-demo',name:'Vườn ban công mẫu',inviteCode:'DEMO01',ownerId:'demo-user',members:['demo-user'],createdAt:1700000000000}}],users:[{key:'demo-user',data:{firstName:'Người dùng',lastName:'Mẫu',displayName:'Người dùng Mẫu',email:'user@example.test',photoUrl:'',lastUpdated:1700000000000}}],admin_audit:[]};
+export function createMock():Repository {
+ let data=structuredClone(seed); const stored=localStorage.getItem('leafy-mock-v1'); if(stored) {try{data=JSON.parse(stored);}catch{localStorage.removeItem('leafy-mock-v1');}}
+ let session:Session|null=null; const listeners=new Set<(s:Session|null)=>void>();
+ const assert=()=>{if(!session?.admin) throw new Error('Không đủ quyền quản trị');};
+ return {
+ async list(kind,search,cursor){assert(); const field=kind==='admin_audit'?'actor':kind==='diseases'?'diseaseName':kind==='users'?'displayName':'name';const rows=data[kind].filter(r=>!search||String(r.data[field]??'').startsWith(search)).sort((a,b)=>a.key<b.key?-1:a.key>b.key?1:0);const start=Number(cursor??0);return {rows:structuredClone(rows.slice(start,start+10)),cursor:start+10,more:start+10<rows.length};},
+ async get(kind,id){assert();return structuredClone(data[kind].find(r=>r.key===id)??null);},
+ async counts(){assert();return Object.fromEntries(Object.entries(data).map(([k,v])=>[k,v.length]));},
+ async save(raw){assert();const input=mutationSchema.parse(raw);const key=String(input.data.id);const rows=data[input.collection];const existing=rows.find(r=>r.key===key);if(input.operation==='create'&&existing)throw new Error('ID đã tồn tại');if(input.operation==='update'&&(!existing||fingerprint(existing.data)!==input.expected))throw new Error('Dữ liệu đã thay đổi. Mở lại bản ghi trước khi lưu.');const next={key,data:input.data};if(existing)rows[rows.indexOf(existing)]=next;else rows.push(next);data.admin_audit.unshift({key:crypto.randomUUID(),data:{actor:session!.uid,action:input.operation,target:`${input.collection}/${key}`,at:new Date().toISOString(),before:existing?.data??null,after:input.data}});localStorage.setItem('leafy-mock-v1',JSON.stringify(data));},
+ async login(email){session={uid:'mock-admin',email:email||'admin@example.test',admin:email!=='viewer@example.test'};listeners.forEach(f=>f(session));},async logout(){session=null;listeners.forEach(f=>f(null));},watch(callback){listeners.add(callback);callback(session);return()=>{listeners.delete(callback);};}
+ };
+}
